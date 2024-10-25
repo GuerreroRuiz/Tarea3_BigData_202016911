@@ -81,7 +81,7 @@ envios_filtrados = df.filter(
 
 # Mostrar el resultado de Consulta6
 print("Consulta6: Transacciones Sea y Electronics")
-
+envios_filtrados.show()
 
 #Consulta7: Peso promedio de productos por método de envio
 #Filtrar por metodo de envio y realizar un promedio del peso total de las transacciones
