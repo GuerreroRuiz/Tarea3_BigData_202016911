@@ -13,12 +13,15 @@ file_path = 'hdfs://localhost:9000/Tarea3BD/dataset.csv'
 df = spark.read.format('csv').option('header','true').option('inferSchema', 'true').load(file_path)
 
 #imprimimos el esquema
+print("Esquema del DataFrame")
 df.printSchema()
 
 # Muestra las primeras 10 filas del DataFrame
+print("Primeras 10 filas del Dataframe")
 df.show(10)
 
 # Estadisticas básicas
+print("Estadisticas básicas")
 df.summary().show()
 
 # Consulta1: Filtrar transacciones  realizadas desde Colombia
@@ -49,7 +52,7 @@ productos_por_categoria.show()
 
 
 #Consulta4: Top 5 productos mas enviados por cantidad total
-print ("Consulta: Top 5 productos mas enviados")
+print ("Consulta4: Top 5 productos mas enviados")
 top_productos = df.groupBy('Product').agg(F.sum('Quantity').alias('Total_Quantity')).orderBy(F.desc('Total_Quantity'))
 
 # Mostrar el resultado de Consulta4
@@ -57,7 +60,7 @@ top_productos.show(5)
 
 
 #Consulta5: Distribuciones  de valor de envio por método de envío
-print ("Consulta6: Distribuciones de valor de envio por método de envio")
+print ("Consulta5: Distribuciones de valor de envio por método de envio")
 valor_por_envio = df.groupBy('Shipping_Method').agg(
     F.avg('Value').alias('Average_Value'),
     F.min('Value').alias('Min_Value'),
@@ -87,7 +90,7 @@ peso_promedio = df.groupBy('Shipping_Method').agg(
 ).orderBy(F.desc('Peso_Promedio'))
 
 #Mostrar el resultado de Consulta7
-print("Peso promedio de productos por método de envío:")
+print("Consulta7: Peso promedio de productos por método de envío:")
 peso_promedio.show(truncate=False)
 
 
@@ -97,8 +100,5 @@ peso_promedio.show(truncate=False)
 importaciones_exportaciones = df.groupBy('Country', 'Import_Export').count()
 
 #Mostrar el resultado de Consulta8
-print("Total de importaciones/exportaciones por país:")
+print("Consulta8: Total de importaciones/exportaciones por país:")
 importaciones_exportaciones.show(truncate=False)
-
-
-
